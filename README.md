@@ -2,7 +2,7 @@
 
 Данная лабораторная работа посвещена изучению инструментов для подписывания и верификации исполняемых файлов на примере **codesign**
 
-```bash
+```ShellSession
 $ open http://bd808.com/blog/2013/10/21/creating-a-self-signed-code-certificate-for-xcode/
 ```
 
@@ -16,59 +16,59 @@ $ open http://bd808.com/blog/2013/10/21/creating-a-self-signed-code-certificate-
 
 ## Tutorial
 
-```bash
+```ShellSession
 $ export GITHUB_USERNAME=<имя_пользователя>
 ```
 
-```bash
+```ShellSession
 $ git clone https://github.com/${GITHUB_USERNAME}/lab13 lab14
 $ cd lab14
 $ git remote remove origin
 $ git remote add origin https://github.com/${GITHUB_USERNAME}/lab14
 ```
 
-```bash
+```ShellSession
 $ cmake -H. -B_build -DCMAKE_BUILD_TYPE=Release -DCMAKE_INSTALL_PREFIX=_install
 $ cmake --build _build
 $ cmake --build _build --target install
 ```
 
-```bash
+```ShellSession
 $ codesign -s "Your Company, Inc." ./_install/bin/demo
 $ codesign -v ./_install/bin/demo
 ```
 
-```bash
+```ShellSession
 $ travis setup releases
 $ cat .travis.yml
 ```
 
-```bash
+```ShellSession
 $ cat >> .travis.yml <<EOF
 before_deploy:
 - codesign -s "Your Company, Inc." ./_install/bin/demo
 EOF
 ```
 
-```bash
+```ShellSession
 $ git add .
 $ git commit -m"added code signing"
 $ git push origin master
 ```
 
-```bash
+```ShellSession
 $ travis login --auto
 $ travis enable
 ```
 
-```bash
+```ShellSession
 $ git tag v0.1.0
 $ git push origin master
 ```
 
 ## Report
 
-```bash
+```ShellSession
 $ cd ~/workspace/labs/
 $ export LAB_NUMBER=14
 $ git clone https://github.com/tp-labs/lab${LAB_NUMBER} tasks/lab${LAB_NUMBER}
